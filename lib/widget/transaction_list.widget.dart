@@ -11,67 +11,40 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 300,
-      child: ListView.builder(
-            itemBuilder: (context, index) {
-              return Card(
-                child: Container(
-                  padding: EdgeInsets.all(15),
-                  child: Row(
-                    children: <Widget>[
-                      Container(
-                        margin: EdgeInsets.symmetric(
-                          vertical: 10,
-                          horizontal: 15,
-                        ),
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Colors.purple,
-                            width: 2,
-                          ),
-                        ),
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          'INR ${transactions[index].amount}',
-                          style: TextStyle(
-                            color: Colors.purple,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
+        height: 400,
+        child: ListView.builder(
+          itemBuilder: (context, index) {
+            return Card(
+              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5,),
+              elevation: 5,
+              child: ListTile(
+                leading: CircleAvatar(
+                  radius: 30,
+                  child: Padding(
+                    padding: EdgeInsets.all(10),
+                    child: FittedBox(
+                      child: Text(
+                        '${transactions[index].amount}',
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Container(
-                            child: Text(
-                            transactions[index].title,
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          ),
-                          Container(
-                            child: Text(
-                            DateFormat('d MMM y').format(transactions[index].date),
-                            style: TextStyle(
-                              color: Colors.grey,
-                              fontSize: 15,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
                 ),
-              );
-            },
-            itemCount: transactions.length,
-          )
-    );
+                title: Text(
+                  transactions[index].title,
+                  style: Theme.of(context).textTheme.title,
+                ),
+                subtitle: Text(
+                  DateFormat.yMMMd().format(transactions[index].date),
+                ),
+                trailing: IconButton(
+                  icon: Icon(Icons.delete),
+                  color: Colors.red,
+                  onPressed: () {},
+                ),
+              ),
+            );
+          },
+          itemCount: transactions.length,
+        ));
   }
 }
